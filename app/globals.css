@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    color: #0b1530;
+    background: #ffffff;
+  }
+  html, body { overflow-x: clip; }
+  body {
+    @apply font-sans text-[15px] leading-relaxed text-ink antialiased;
+    background: #ffffff;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display text-navy;
+    line-height: 1.2;
+  }
+  h1 { @apply text-3xl font-extrabold; }
+  h2 { @apply text-xl font-bold; }
+  h3 { @apply text-base font-bold; }
+  /* No italics anywhere. */
+  em, i, cite, dfn, var, address { font-style: normal; }
+  a { @apply text-navy underline underline-offset-2; }
+  a:hover { @apply text-terra; }
+  :focus-visible {
+    outline: 3px solid #8b3a2e;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+  ::placeholder { color: #6e7686; opacity: 1; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .skip-link {
+    @apply absolute left-2 top-2 z-[100] -translate-y-24 rounded-btn bg-navy px-4 py-2 font-semibold text-white no-underline;
+  }
+  .skip-link:focus { @apply translate-y-0 text-white; }
+
+  .eyebrow {
+    @apply text-[11px] font-bold uppercase text-terra;
+    letter-spacing: 0.2em;
+  }
+  .card {
+    @apply rounded-card border border-line bg-white;
+  }
+  .card-pad { @apply p-5; }
+
+  .btn {
+    @apply inline-flex min-h-[40px] items-center justify-center gap-2 rounded-btn border px-4 py-2 text-sm font-semibold no-underline transition-colors;
+  }
+  .btn:disabled, .btn[aria-disabled="true"] { @apply cursor-not-allowed opacity-60; }
+  .btn-primary { @apply btn border-navy bg-navy text-white hover:bg-navy-deep hover:text-white; }
+  .btn-accent { @apply btn border-terra bg-terra text-white hover:bg-terra-dark hover:text-white; }
+  .btn-secondary { @apply btn border-navy bg-white text-navy hover:bg-navy-tint hover:text-navy; }
+  .btn-quiet { @apply btn border-transparent bg-transparent text-navy hover:bg-navy-tint hover:text-navy; }
+  .btn-sm { @apply min-h-[32px] px-3 py-1 text-xs; }
+
+  .label { @apply mb-1 block text-sm font-semibold text-navy; }
+  .hint { @apply mt-1 block text-xs text-ink-muted; }
+  .input {
+    @apply block w-full rounded-btn border border-line-strong bg-white px-3 py-2 text-[15px] text-ink;
+  }
+  .input:focus-visible { outline-offset: 0; }
+  textarea.input { @apply min-h-[88px]; }
+
+  .chip {
+    @apply inline-flex items-center gap-1 rounded-full border border-line bg-white px-2 py-0.5 text-xs font-semibold text-navy;
+  }
+  .chip-terra { @apply chip border-terra text-terra; }
+  .chip-navy { @apply chip border-navy bg-navy text-white; }
+  .chip-ok { @apply chip border-ok text-ok; }
+  .chip-warn { @apply chip border-warn text-warn; }
+  .chip-danger { @apply chip border-danger text-danger; }
+
+  /* Interactive state colors: never green for completed. */
+  .state-locked { @apply border border-dashed border-line-strong bg-white text-ink-muted; }
+  .state-unlocked { @apply border border-terra bg-white text-navy; }
+  .state-current { @apply border-2 border-terra bg-white text-navy; }
+  .state-complete { @apply border border-navy bg-navy-tint text-navy; }
+
+  .section-title { @apply font-display text-lg font-bold text-navy; }
+  .sr-only-focusable:not(:focus) { @apply sr-only; }
+}
